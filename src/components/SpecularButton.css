@@ -1,0 +1,127 @@
+.specular-button {
+  --sb-radius: 18px;
+  --sb-tint: #ff4438;
+  --sb-tint-opacity: 0;
+  --sb-blur: 0px;
+  --sb-text-color: #f5f5f5;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--sb-text-color);
+  background: color-mix(in srgb, var(--sb-tint) calc(var(--sb-tint-opacity) * 100%), transparent);
+  border-radius: var(--sb-radius);
+  backdrop-filter: blur(var(--sb-blur));
+  -webkit-backdrop-filter: blur(var(--sb-blur));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 10px 30px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.specular-button:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* 主按钮（实心红）保留品牌强调色 */
+.specular-button--primary {
+  border-color: rgba(255, 90, 70, 0.5);
+}
+.specular-button--primary:hover {
+  border-color: rgba(255, 130, 110, 0.85);
+}
+
+/* 卡片内联系按钮：沿用卡片红调，并确保可点击 */
+.specular-button--card {
+  border-color: rgba(255, 90, 77, 0.45);
+  pointer-events: auto;
+}
+.specular-button--card:hover {
+  border-color: rgba(255, 130, 110, 0.85);
+}
+
+.specular-button:active {
+  transform: scale(0.97);
+}
+
+.specular-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--sb-text-color) 60%, transparent);
+  outline-offset: 3px;
+}
+
+.specular-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.specular-button:disabled:active {
+  transform: none;
+}
+
+.specular-button--sm {
+  font-size: 0.85rem;
+  padding: 10px 22px;
+}
+
+.specular-button--md {
+  font-size: 0.98rem;
+  padding: 13px 28px;
+}
+
+.specular-button--lg {
+  font-size: 1.08rem;
+  padding: 17px 38px;
+}
+
+/* Canvas extends past the button so the rim glow can bleed outside the edge */
+.specular-button__fx {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.specular-button__fx canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.specular-button__label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.specular-button__label svg {
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.specular-button:hover .specular-button__label svg {
+  transform: translateX(3px);
+}
+
+/* 减少动态效果：不挂载 WebGL 时仍给出清晰可点的按钮外观 */
+@media (prefers-reduced-motion: reduce) {
+  .specular-button__fx {
+    display: none;
+  }
+}

@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 视频走 R2 对象存储，不进 GitHub（避免 519MB 大文件拖垮推送）
+public/videos/
+# 本地构建产物目录
+dist-prod
+
+# 临时验证构建产物（含大视频，绝不入库）
+dist_verify/
